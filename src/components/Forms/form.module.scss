@@ -1,4 +1,5 @@
 @import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
 
 .form {
   padding: 30px 47px;
@@ -15,30 +16,28 @@
 
 .input {
   height: 48px;
-  background: none;
+  @include inputText;
+  background: transparent;
   border: none;
+  border-bottom: 1px solid $inputLine;
   position: relative;
 
   &::after {
     content: '';
+  
     position: absolute;
-    top: 0;
+    bottom: 5px;
     left: 0;
-    width: 1px;
+    right: 0;
+    
     height: 1px;
-    background: $input-line;
+    background-color: #f00;
   }
 }
 
 .title {
-  font-family: Encode Sans Expanded;
-  font-size: 32px;
-  line-height: 36px;
+  padding-top: 85px;
+  font-family: 'Encode Sans Expanded';
+  @include title;
   color: $black;
-}
-
-.error {
-  padding: 11px 14px;
-  background: $alert;
-  color: $white;
 }

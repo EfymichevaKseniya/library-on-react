@@ -1,20 +1,17 @@
 import React  from 'react';
 import { Navigate } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
+import Alert from '../Alert/Alert';
 import * as Yup from 'yup';
 import styles from './form.module.scss';
 import Button from '../Buttons/Button';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Введите email"),
-  name: Yup.string().required("Поле не может быть пустым"),
   password: Yup.string()
     .min(4, "Too Short!")
     .max(50, "Too Long!")
     .required("Поле не может быть пустым"),
-  password_confirmation: Yup.string()
-    .required('Confirm password is required')
-    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
 });
 
 const url = 'https://internsapi.public.osora.ru/api/auth/login';
@@ -31,7 +28,8 @@ class LoginForm extends React.Component {
 
       if (response.ok) {
         let json = await response.json();
-        <Navigate to='/login' />
+        let data = await json.data;
+        localStorage.setItem('token', data.access_token);
       }
   };
 
@@ -39,21 +37,21 @@ class LoginForm extends React.Component {
     return (
       <>
         <Formik
-          initialValues={{ email: 'test@mail.ru', password: '123456', password_confirmation: '123456', name: 'Petr'}}
+          initialValues={{ email: 'test@mail.ru', password: '123456'}}
           validationSchema={SignUpSchema}
           onSubmit={this.handleSubmit}
         >
-          {() => {
+          {({isValid}) => {
             return (
               <Form className={styles.form}>
-                <ErrorMessage name='name' className={styles.error} component='div'/>
+                { !isValid ? <Alert className='error' text='Alert message' />: null }
                 <h1 className={styles.title}>Login</h1>
                 <div className={styles.input__fields}>
                   <Field className={styles.input} type="email" name="email" />
                   <Field className={styles.input} type="password" name="password" />
                 </div>
                 <Button
-                  text='Login'
+                  text='Log in'
                   size='big'
                   color='blue'
                   type='submit'

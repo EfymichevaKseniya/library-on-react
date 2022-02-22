@@ -1,0 +1,7 @@
+@import '../../styles/colors.scss';
+
+.header {
+  min-height: 60px;
+  background: $headerBg;
+  flex: 0 0 auto;
+}

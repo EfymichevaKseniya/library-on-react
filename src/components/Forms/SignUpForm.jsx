@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from './form.module.scss';
 import Button from '../Buttons/Button';
+import Alert from '../Alert/Alert';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Введите email"),
@@ -41,12 +42,13 @@ class SignUpForm extends React.Component {
         <Formik
           initialValues={{ email: 'test@mail.ru', password: '123456', password_confirmation: '123456', name: 'Petr'}}
           validationSchema={SignUpSchema}
+          validateOnBlur={true}
           onSubmit={this.handleSubmit}
         >
-          {() => {
+          {({isValid}) => {
             return (
               <Form className={styles.form}>
-                <ErrorMessage name='name' className={styles.error} component='div'/>
+                { !isValid ? <Alert className='error' text='Alert message' />: null }
                 <h1 className={styles.title}>Registration</h1>
                 <div className={styles.input__fields}>
                   <Field className={styles.input} type="name" name="name" />

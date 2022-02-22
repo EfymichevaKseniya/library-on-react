@@ -18,7 +18,7 @@ export default class Button extends React.Component {
 
   render() {
     return (
-      <button className={`btn btn--${this.state.size} btn--${this.state.color}`} type={this.state.type}>
+      <button className={`btn btn--${this.state.size} btn--${this.state.color}`} type={this.state.type} onClick={this.handleClick}>
         {this.state.text}
       </button>
     );

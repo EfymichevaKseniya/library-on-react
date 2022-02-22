@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Encode Sans Expanded';
+    src: local('Encode Sans Expanded Semi Bold'), local('Encode-Sans-Expanded-Semi-Bold'),
+        url('EncodeSansExpanded-SemiBold.woff2') format('woff2'),
+        url('EncodeSansExpanded-SemiBold.woff') format('woff'),
+        url('EncodeSansExpanded-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }

@@ -1,4 +1,5 @@
 @import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
 
 .btn {
   color: $white;
@@ -6,6 +7,8 @@
   border: none;
   cursor: pointer;
   border-radius: 3px;
+  text-transform: uppercase;
+  @include btnText;
 
   &--big {
     width: 279px;
