@@ -1,9 +1,42 @@
+@import '../../styles/fonts.scss';
+
 .form {
   padding: 12px;
 }
 
+.input__wrapper {
+  position: relative;
+  border-radius: 3px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    background: url('../../img/search.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 9px;
+    background: url('../../img/clear.svg') no-repeat center;
+    width: 17px;
+    height: 17px;
+  }
+}
+
 .input {
   width: 100%;
-  padding: 6px;
-  border-radius: 3px;
+  padding: 9px 10px 9px 36px;
+  outline: none;
+  @include inputSearch;
 }
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { opacity: 0; cursor: pointer; z-index: 2; }

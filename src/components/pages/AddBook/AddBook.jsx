@@ -1,17 +1,21 @@
 import React from 'react';
+import BooksContext, { BooksContextProvider } from '../../../utils/BooksContext';
+import BookListWrapper from '../../BookListWrapper/BookListWrapper';
 import Page from '../../Page/Page';
+
+export const BookListContext = React.createContext();
 
 
 class AddBook extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+  static contextType = BooksContext;
 
   render() {
     return (
-      <Page >
-
-      </Page>
+      <BooksContextProvider>
+        <Page >
+          <BookListWrapper />
+        </Page>
+      </BooksContextProvider>
     )
   }
 }

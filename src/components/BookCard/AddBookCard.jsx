@@ -1,39 +1,50 @@
 import React from 'react';
-import Modal from '../Modal/Modal';
 import Button from '../Buttons/Button';
-import styles from './card.module.css';
+import styles from './card.module.scss';
 
 
-class Page extends React.Component {
+class BookCard extends React.Component {
   constructor(props) {
     super(props);
     this.id = props.id;
-    this.text = props.text;
-    this.state = {isShow: true};
-    this.handleClick = this.handleClick.bind(this);
+    this.index = props.index;
+    this.title = props.title;
+    this.favorite = false;
+    this.onClick = this.onClick.bind(this);
   }
 
-  showModal() {
+  state = {
+    modalOpen: this.props.modalOpen
+  }
+
+  onClick(e) {
+    console.log(e.target.closest('li'))
     this.setState(prevState => ({
-      isShow: !prevState.isShow
+      modalOpen: !prevState.modalOpen
     }));
   }
 
+
   render() {
+    console.log(this.state.modalOpen);
+
     return (
       <>
-        <li className={styles.card__item} key={this.id}>
-          <span className={styles.text}>{this.text}</span>
+        <li className={styles.card__item} key={this.id} data-id={this.id}>
+          <span className={this.favorite ? styles.favorite : styles.unfavorite}></span>
+          <span className={styles.number}>{this.index}.</span>
+          <span className={styles.title}>{this.title}</span>
           <Button
             text='add'
             color='green'
-            onClick={this.handleClick}
+            size='normal'
+            type='button'
+            onClick={this.onClick}
           />
         </li>
-        <Modal onShow={this.isShow} id={this.id} />
       </>
     )
   }
 }
 
-export default Page;
+export default BookCard;

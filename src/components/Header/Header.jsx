@@ -12,7 +12,7 @@ class Header extends React.Component {
   render() {
     return (
       <header className={styles.header}>
-        {url.includes('add') ? <InputSearch /> : <h1 className={styles.title}>{url.slice(0, 1)}</h1>}
+        {url.includes('add') ? <InputSearch /> : <h1 className={styles.title}>Library{-url.slice(0, 1)}</h1>}
       </header>
     )
   }

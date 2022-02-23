@@ -27,14 +27,38 @@
 
   &--blue {
     background: $blue;
+
+    &:hover {
+      background: darken($color: $blue, $amount: 2%);
+    }
+
+    &:focus {
+      background: darken($color: $blue, $amount: 5%);
+    }
   }
   
   &--green {
     background: $green;
+
+    &:hover {
+      background: darken($color: $green, $amount: 2%);
+    }
+
+    &:focus {
+      background: darken($color: $green, $amount: 5%);
+    }
   }
   
   &--red {
     background: $red;
+
+    &:hover {
+      background: darken($color: $red, $amount: 2%);
+    }
+
+    &:focus {
+      background: darken($color: $red, $amount: 5%);
+    }
   }
 }
 
