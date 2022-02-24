@@ -1,0 +1,27 @@
+@import './styles/reset.scss';
+@import './styles/fonts.scss';
+
+html, body {
+  font-family: 'Encode Sans Expanded';
+  font-size: 14px;
+  line-height: 14px;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+header,
+footer {
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}

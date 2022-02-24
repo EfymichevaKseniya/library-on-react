@@ -1,0 +1,43 @@
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+
+.form {
+  padding: 30px 47px;
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.input__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.input {
+  height: 48px;
+  @include inputText;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $inputLine;
+  position: relative;
+
+  &::after {
+    content: '';
+  
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    
+    height: 1px;
+    background-color: #f00;
+  }
+}
+
+.title {
+  padding-top: 85px;
+  font-family: 'Encode Sans Expanded';
+  @include title;
+  color: $black;
+}

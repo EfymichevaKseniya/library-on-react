@@ -1,0 +1,15 @@
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+
+.header {
+  min-height: 60px;
+  background: $headerBg;
+  flex: 0 0 auto;
+}
+
+.title {
+  @include titlePage;
+  color: $white;
+  font-weight: 600;
+  padding: 22px 69px;
+}
