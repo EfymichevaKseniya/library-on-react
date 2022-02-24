@@ -16,7 +16,7 @@ class Footer extends React.Component {
         <nav className={styles.nav}>
           <ol className={styles.nav__list}>
             <li>
-              <Link to="/all">
+              <Link to="/">
                 <img src={AllBook} alt='all book sign' />
               </Link>
             </li>
