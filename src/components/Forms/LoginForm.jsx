@@ -51,9 +51,9 @@ class LoginForm extends React.Component {
           {({isValid}) => {
             return (
               <Form className={styles.form}>
-                {token && (
+                {/* {token && (
                   <Navigate to='/' replace={true} />
-                )}
+                )} */}
                 { !isValid || error ? <Alert className='error' text={error.message} />: null }
                 <h1 className={styles.title}>Login</h1>
                 <div className={styles.input__fields}>

@@ -10,9 +10,11 @@ import {
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
-import reducers from "./store/booksReducer";
+// import reducers from "./store/booksReducer";
+import rootReducer from './store/store';
 
-const store = createStore(reducers, applyMiddleware(thunk));
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>

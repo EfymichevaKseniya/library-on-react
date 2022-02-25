@@ -2,11 +2,19 @@ import React from "react";
 import Button from "../Buttons/Button";
 import CloseBtn from '../../img/close.svg';
 import styles from './modal.module.scss';
+import { connect } from "react-redux";
 import BooksContext from "../../utils/BooksContext";
+import { addBook } from "../../store/booksActions";
 
 const url = 'https://internsapi.public.osora.ru/api/book/add';
 
-class Modal extends React.Component {
+function mapDispatchToProps(dispatch) {
+  return {
+    addBook: book => dispatch(addBook(book))
+  };
+}
+
+export class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.id = this.props.id;
@@ -25,25 +33,28 @@ class Modal extends React.Component {
   onClickButton = async (e) => {
       e.preventDefault();
       const { books } = this.context;
-      const accessToken = localStorage.getItem('token');
+      // const accessToken = localStorage.getItem('token');
       let book = books.find((item) => item.id === this.props.id);
-      console.log(this.id);
+      console.log(book);
       let objBookOnServer = {
         'uid': book.id,
         'title': book.volumeInfo.title,
         'description': book.volumeInfo.description,
-        'authors':  book.volumeInfo.authors,
+        'authors': book.volumeInfo.authors,
         'favorite': 0,
       }
-      let response = await fetch(url, {
-        method: 'POST',
-        access_token: `${accessToken}`,
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(objBookOnServer)
-      });
-      console.log(response.status);
+      this.props.addBook( objBookOnServer );
+      
+      // let response = await fetch(url, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `Bearer ${accessToken}`,
+      //   },
+      //   body: JSON.stringify(objBookOnServer)
+      // });
+      // console.log(JSON.stringify(objBookOnServer));
+      // console.log(await response.json());
       this.props.showModal(false);
   }
 
@@ -87,4 +98,4 @@ class Modal extends React.Component {
   }  
 }
 
-export default Modal;
+export default connect(mapDispatchToProps)(Modal);
