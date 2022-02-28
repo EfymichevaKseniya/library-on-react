@@ -3,10 +3,12 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import {Home} from './components/pages/Home/Home';
+import { Home } from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import SignUp from './components/pages/SignUp/SignUp';
 import AddBook from './components/pages/AddBook/AddBook';
+import { Info } from './components/pages/Info/Info';
+
 
 function App() {
   return (
@@ -16,12 +18,8 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/add' element={<AddBook />} />
-          {/* <Route path="/favorite">
-            <Favorite />
-          </Route>
-          <Route path="/info/:id">
-            <Info />
-          </Route> */}
+          <Route path='/info/:id' element={<Info />} />
+          {/* <Route exact path='/favorite' element={<Favorite />} /> */}
         </Routes>
     </div>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { fetchBooksList } from '../../store/booksActions';
+// import { fetchBooksList } from '../../store/booksActions';
 import BookCardInList from '../BookCard/BookCardInList';
-import Modal from '../Modal/Modal';
+import ModalDeleteBook from '../Modal/ModalDeleteBook';
 import styles from './bookList.module.scss';
 
 
@@ -11,12 +11,7 @@ export class BookListWrapperForMyBooks extends React.Component {
     super(props);
     this.showModal = this.showModal.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
-    this.books = this.props.books;
     this.state = {idForShelf: ''};
-  }
-
-  componentDidMount() {
-    this.props.fetchBooksList();
   }
 
   state = {
@@ -34,18 +29,18 @@ export class BookListWrapperForMyBooks extends React.Component {
   }
 
     render() {
+    const books  = this.props.booksShelf;
     const modalOpen = this.state.modalOpen;
     const idForShelf = this.state.idForShelf;
-    console.log(this.props.books);
 
     return (
       <>
         <ul className={styles.book__list}>
-          {/* {this.props.books.length !== 0 && this.props.books.map((book, index) => {
+          {books && books.map((book, index) => {
               return (
                 <BookCardInList
                   id={book.id}
-                  title={book.volumeInfo.title}
+                  title={book.title}
                   key={book.id}
                   index={index+1}
                   modalOpen={modalOpen}
@@ -53,9 +48,9 @@ export class BookListWrapperForMyBooks extends React.Component {
                   deleteBook={this.deleteBook}
                 />
               )
-            })} */}
+            })}
         </ul>
-        <Modal
+        <ModalDeleteBook
           modalOpen={modalOpen}
           id={idForShelf}
           title='Delete'
@@ -67,8 +62,8 @@ export class BookListWrapperForMyBooks extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { books: state.books };
-};
+const mapStateToProps = state => ({
+  ...state
+});
 
-export default connect(mapStateToProps, { fetchBooksList })(BookListWrapperForMyBooks);
+export default connect(mapStateToProps, null)(BookListWrapperForMyBooks);

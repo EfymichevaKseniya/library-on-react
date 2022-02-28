@@ -1,35 +1,33 @@
 import * as actions from './actionTypes';
 
-export default (state = [], action) => {
-  switch (action.type) {
-    case "FETCH_BOOKS":
-      return action.payload;
-    default:
-      return state;
-  }
-};
+// export default (state = [], action) => {
+//   switch (action.type) {
+//     case "FETCH_BOOKS":
+//       return action.payload;
+//     default:
+//       return state;
+//   }
+// };
 
-export function reducer(state = [], action) {
+export default function(state = { booksShelf: [] }, action) {
   switch (action.type) {
     case actions.ADD_BOOK:
-      return [...state, {
-        id: action.payload.id,
-        title: action.payload.title,
-        description: action.payload.description,
-        authors: action.payload.authors,
-        favorite: 0,
-      }];
-
+      return {
+        ...state,
+        booksShelf: [action.payload, ...state.booksShelf]
+      };
     case actions.TOGGLE_FAVORITE:
-      return state.map(book => {
-        if (book.id === action.payload.id)
-          return { ...book, favorite: !book.favorite }
-        return book;
-      });
+      return Object.assign({}, state, {
+        booksShelf: state.booksShelf.map((book) => {
+          return book.id === action.payload.id ?
+          Object.assign({}, book, {favorite: !book.favorite}) : book
+        })
+      })
 
     case actions.REMOVE_BOOK:
-      return state.filter(book => action.payload.id !== book.id);
-
+      // return state.booksShelf.filter(book => action.payload.id !== book.id);
+      return Object.assign({}, state, {
+        booksShelf: state.booksShelf.filter((book) => action.payload.id !== book.id)})
     default:
       return state;
   }

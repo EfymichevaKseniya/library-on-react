@@ -2,9 +2,9 @@ import * as actions from './actionTypes';
 const url = 'https://internsapi.public.osora.ru/api/book/list';
 const token = localStorage.getItem('token');
 
-export const fetchBooksList = () => async (dispatch) => {
-  await dispatch(fetchBooks());
-};
+// export const fetchBooksList = () => async (dispatch) => {
+//   await dispatch(fetchBooks());
+// };
 
 
 export const fetchBooks = () => async (dispatch) => {
@@ -15,6 +15,7 @@ export const fetchBooks = () => async (dispatch) => {
 
   dispatch({ type: "FETCH_BOOKS", payload: response.data });
 };
+
 
 export const addBook = book => ({
   type: actions.ADD_BOOK,

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { Provider } from "react-redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
 import {
@@ -10,18 +11,19 @@ import {
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
-// import reducers from "./store/booksReducer";
-import rootReducer from './store/store';
+import allReducers from "./store/booksReducer";
 
-// const store = createStore(rootReducer, applyMiddleware(thunk));
-const store = createStore(rootReducer);
+const store = createStore(allReducers, composeWithDevTools());
+// const store = createStore(reducers, applyMiddleware);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+  <StrictMode>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </StrictMode>,
   document.getElementById('root')
 );
 

@@ -1,17 +1,18 @@
-// import { combineReducers } from 'redux';
-// import booksReducer from '.reducers/booksReducer';
+import { combineReducers } from 'redux';
+import booksReducer from './booksReducer';
 
-const initialState = {
-  books: []
-};
+// const initialState = {
+//   books: []
+// };
 
-function rootReducer(state = initialState, action) {
-  return state;
-};
+// function rootReducer(state = initialState, action) {
+//   return state;
+// };
 
-export default rootReducer;
+// export default rootReducer;
 
+const allReducers = combineReducers({
+  booksShelf: booksReducer
+});
 
-// export default combineReducers({
-//     books: booksReducer,
-// });
+export default allReducers;

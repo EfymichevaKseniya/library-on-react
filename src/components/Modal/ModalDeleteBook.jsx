@@ -4,11 +4,10 @@ import CloseBtn from '../../img/close.svg';
 import styles from './modal.module.scss';
 import { connect } from "react-redux";
 import BooksContext from "../../utils/BooksContext";
-import { addBook } from "../../store/booksActions";
+import { removeBook } from "../../store/booksActions";
 
-const url = 'https://internsapi.public.osora.ru/api/book/add';
 
-export class Modal extends React.Component {
+export class ModalDeleteBook extends React.Component {
   constructor(props) {
     super(props);
     this.id = this.props.id;
@@ -26,27 +25,7 @@ export class Modal extends React.Component {
 
   onClickButton = (e) => {
       e.preventDefault();
-      const { books } = this.context;
-      let book = books.find((item) => item.id === this.props.id);
-      console.log(book);
-      let objBookOnServer = {
-        'id': book.id,
-        'title': book.volumeInfo.title,
-        'description': book.volumeInfo.description,
-        'authors': book.volumeInfo.authors,
-        'favorite': 0,
-      }
-      this.props.addBook(objBookOnServer);
-      // let response = await fetch(url, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${accessToken}`,
-      //   },
-      //   body: JSON.stringify(objBookOnServer)
-      // });
-      // console.log(JSON.stringify(objBookOnServer));
-      // console.log(await response.json());
+      this.props.removeBook(this.id);
       this.props.showModal(false);
   }
 
@@ -90,4 +69,4 @@ export class Modal extends React.Component {
   }  
 }
 
-export default connect(null, {addBook})(Modal);
+export default connect(null, {removeBook})(ModalDeleteBook);

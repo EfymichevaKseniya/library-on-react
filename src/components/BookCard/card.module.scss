@@ -37,3 +37,8 @@
   font-family: 'Encode Sans Expanded';
   color: $line;
 }
+
+.buttons__box {
+  display: flex;
+  gap: 10px;
+}
