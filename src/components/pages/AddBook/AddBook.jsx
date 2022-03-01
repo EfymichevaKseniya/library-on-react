@@ -12,7 +12,7 @@ class AddBook extends React.Component {
   render() {
     return (
       <BooksContextProvider>
-        <Page >
+        <Page>
           <BookListWrapper />
         </Page>
       </BooksContextProvider>

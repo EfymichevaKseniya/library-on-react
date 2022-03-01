@@ -33,7 +33,7 @@ class BookListWrapper extends React.Component {
     const { books } = this.context;
     const modalOpen = this.state.modalOpen;
     const idForShelf = this.state.idForShelf;
-    console.log(idForShelf);
+    // console.log(idForShelf);
 
     return (
       <>

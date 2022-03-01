@@ -14,6 +14,7 @@ export class BookCardInList extends React.Component {
     this.title = props.title;
     this.onClick = this.onClick.bind(this);
     this.openModal = this.openModal.bind(this);
+    this.favorite = this.props.favorite;
   }
 
   state = {
@@ -24,7 +25,6 @@ export class BookCardInList extends React.Component {
     this.props.toggleFavorite(this.id);
     console.log(this.id);
     console.log(this.props.booksShelf.find(item => item.id === this.id));
-    console.log(this.favorite);
   }
 
   openModal = (e) => {
@@ -32,7 +32,6 @@ export class BookCardInList extends React.Component {
   }
 
   render() {
-    this.favorite = this.props.favorite;
     return (
       <>
         <li className={styles.card__item} key={this.id} data-id={this.id}>

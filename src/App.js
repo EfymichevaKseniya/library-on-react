@@ -1,28 +1,44 @@
 import './App.scss';
+import React from 'react';
 import {
   Route,
-  Routes
+  Routes,
 } from "react-router-dom";
 import { Home } from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import SignUp from './components/pages/SignUp/SignUp';
 import AddBook from './components/pages/AddBook/AddBook';
-import { Info } from './components/pages/Info/Info';
+import { InfoBook } from './components/pages/InfoBook/InfoBook';
+import { FavoriteBooks } from './components/pages/FavoriteBooks/FavoriteBooks';
+import { Provider } from "react-redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore } from "redux";
+import allReducers from "./store/booksReducer";
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 
+export const store = createStore(allReducers, composeWithDevTools());
 
-function App() {
-  return (
-    <div className="App">
-      <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/signup' element={<SignUp />} />
-          <Route exact path='/add' element={<AddBook />} />
-          <Route path='/info/:id' element={<Info />} />
-          {/* <Route exact path='/favorite' element={<Favorite />} /> */}
-        </Routes>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Provider store={store}>
+          <Router>
+            <Routes>
+              <Route exact path='/' element={<Home />} />
+                <Route exact path='/login' element={<Login />} />
+                <Route exact path='/signup' element={<SignUp />} />
+                <Route exact path='/add' element={<AddBook />} />
+                <Route path='/info/:id' element={<InfoBook />} />
+                <Route exact path='/favorite' element={<FavoriteBooks />} />
+              </Routes>
+          </Router>
+        </Provider>
+      </div>
+    );
+  }
 }
 
 export default App;

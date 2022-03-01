@@ -11,8 +11,6 @@ export const fetchBooks = () => async (dispatch) => {
   const response = await fetch(`${url}?Authorization=Bearer${token}`);
   let result = await response.json();
   console.log(result)
-  console.log(1);
-
   dispatch({ type: "FETCH_BOOKS", payload: response.data });
 };
 

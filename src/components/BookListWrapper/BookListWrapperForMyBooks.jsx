@@ -12,6 +12,7 @@ export class BookListWrapperForMyBooks extends React.Component {
     this.showModal = this.showModal.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
     this.state = {idForShelf: ''};
+    this.books = this.props.books;
   }
 
   state = {
@@ -29,14 +30,15 @@ export class BookListWrapperForMyBooks extends React.Component {
   }
 
     render() {
-    const books  = this.props.booksShelf;
+    // const books  = this.props.booksShelf;
     const modalOpen = this.state.modalOpen;
     const idForShelf = this.state.idForShelf;
+    console.log(this.books);
 
     return (
       <>
         <ul className={styles.book__list}>
-          {books && books.map((book, index) => {
+          {this.books && this.books.map((book, index) => {
               return (
                 <BookCardInList
                   id={book.id}
@@ -44,6 +46,7 @@ export class BookListWrapperForMyBooks extends React.Component {
                   key={book.id}
                   index={index+1}
                   modalOpen={modalOpen}
+                  favorite={book.favorite}
                   showModal={this.showModal}
                   deleteBook={this.deleteBook}
                 />
@@ -66,4 +69,4 @@ const mapStateToProps = state => ({
   ...state
 });
 
-export default connect(mapStateToProps, null)(BookListWrapperForMyBooks);
+export default connect(mapStateToProps)(BookListWrapperForMyBooks);

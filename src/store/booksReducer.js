@@ -9,7 +9,7 @@ import * as actions from './actionTypes';
 //   }
 // };
 
-export default function(state = { booksShelf: [] }, action) {
+export default function booksReducer(state = { booksShelf: [] }, action) {
   switch (action.type) {
     case actions.ADD_BOOK:
       return {

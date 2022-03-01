@@ -28,7 +28,6 @@ export class Modal extends React.Component {
       e.preventDefault();
       const { books } = this.context;
       let book = books.find((item) => item.id === this.props.id);
-      console.log(book);
       let objBookOnServer = {
         'id': book.id,
         'title': book.volumeInfo.title,
@@ -89,5 +88,6 @@ export class Modal extends React.Component {
       )
   }  
 }
+
 
 export default connect(null, {addBook})(Modal);
