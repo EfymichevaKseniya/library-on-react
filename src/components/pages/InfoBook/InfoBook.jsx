@@ -1,25 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Page from '../../Page/Page';
-
-const url = window.location.pathname.slice(1,1);
+import { store } from '../../../App';
+import styles from './info.module.scss';
 
 export class InfoBook extends React.Component {
   render() {
-    // const book = this.props.booksShelf;
-    console.log(this.state);
+    const id = window.location.pathname.split('/')[2];
+    const book = store.getState().booksShelf.find(item => item.id === id);
+    console.log(id);
+    console.log(book);
     return (
       <Page>
-        {/* <h2>{this.book.title}</h2>
-        <label>{this.book.authors}</label>
-        <p>{this.book.description}</p> */}
+        <div className={styles.book}>
+          <h2 className={styles.title}>{book.title}</h2>
+            <label className={styles.label}>{book.authors}</label>
+          <p className={styles.text}>{book.description}</p>
+        </div> 
+        
       </Page>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
-});
 
-export default connect(mapStateToProps, null)(InfoBook);
+export default connect()(InfoBook);

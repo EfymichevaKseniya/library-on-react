@@ -19,7 +19,6 @@ export class Home extends React.Component {
     }
     console.log(this.props);
     const books = store.getState().booksShelf;
-    console.log(store.getState().booksShelf);
     return (
       <Page>
         <BookListWrapperForMyBooks books={books} />

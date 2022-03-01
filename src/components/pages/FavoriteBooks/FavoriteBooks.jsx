@@ -4,7 +4,7 @@ import { store } from '../../../App';
 import { BookListWrapperForMyBooks } from '../../BookListWrapper/BookListWrapperForMyBooks';
 import Page from '../../Page/Page';
 
-const url = window.location.pathname.slice(1,1);
+const url = window.location.pathname.split(':').slice(1,1);
 
 export class FavoriteBooks extends React.Component {
   render() {
