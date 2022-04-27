@@ -1,56 +1,50 @@
 import React from 'react';
-import { connect } from "react-redux";
-// import { fetchBooksList } from '../../store/booksActions';
+import { connect } from 'react-redux';
 import BookCardInList from '../BookCard/BookCardInList';
 import ModalDeleteBook from '../Modal/ModalDeleteBook';
 import styles from './bookList.module.scss';
-
 
 export class BookListWrapperForMyBooks extends React.Component {
   constructor(props) {
     super(props);
     this.showModal = this.showModal.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
-    this.state = {idForShelf: ''};
     this.books = this.props.books;
-  }
-
-  state = {
-    modalOpen: false,
+    this.state = { idForShelf: '', modalOpen: false };
   }
 
   showModal() {
-    this.setState(prevState => ({
-      modalOpen: !prevState.modalOpen
+    this.setState((prevState) => ({
+      modalOpen: !prevState.modalOpen,
     }));
   }
 
   deleteBook(e) {
-    this.setState({idForShelf: e});
+    this.setState({ idForShelf: e });
   }
 
-    render() {
+  render() {
     // const books  = this.props.booksShelf;
-    const modalOpen = this.state.modalOpen;
-    const idForShelf = this.state.idForShelf;
+    const { modalOpen, idForShelf, showModal, deleteBook } = this.state;
     console.log(this.books);
 
     return (
       <>
         <ul className={styles.book__list}>
-          {this.books && this.books.map((book, index) => {
+          {this.books &&
+            this.books.map((book, index) => {
               return (
                 <BookCardInList
                   id={book.id}
                   title={book.title}
                   key={book.id}
-                  index={index+1}
+                  index={index + 1}
                   modalOpen={modalOpen}
                   favorite={book.favorite}
-                  showModal={this.showModal}
-                  deleteBook={this.deleteBook}
+                  showModal={showModal}
+                  deleteBook={deleteBook}
                 />
-              )
+              );
             })}
         </ul>
         <ModalDeleteBook
@@ -58,15 +52,15 @@ export class BookListWrapperForMyBooks extends React.Component {
           id={idForShelf}
           title='Delete'
           content='delete'
-          showModal={this.showModal}
+          showModal={showModal}
         />
       </>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
+const mapStateToProps = (state) => ({
+  ...state,
 });
 
 export default connect(mapStateToProps)(BookListWrapperForMyBooks);

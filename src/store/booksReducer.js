@@ -14,22 +14,25 @@ export default function booksReducer(state = { booksShelf: [] }, action) {
     case actions.ADD_BOOK:
       return {
         ...state,
-        booksShelf: [action.payload, ...state.booksShelf]
+        booksShelf: [action.payload, ...state.booksShelf],
       };
     case actions.TOGGLE_FAVORITE:
       return Object.assign({}, state, {
         booksShelf: state.booksShelf.map((book) => {
-          return book.id === action.payload.id ?
-          Object.assign({}, book, {favorite: !book.favorite}) : book
-        })
-      })
+          return book.id === action.payload.id
+            ? Object.assign({}, book, { favorite: !book.favorite })
+            : book;
+        }),
+      });
 
     case actions.REMOVE_BOOK:
       // return state.booksShelf.filter(book => action.payload.id !== book.id);
       return Object.assign({}, state, {
-        booksShelf: state.booksShelf.filter((book) => action.payload.id !== book.id)})
+        booksShelf: state.booksShelf.filter(
+          (book) => action.payload.id !== book.id
+        ),
+      });
     default:
       return state;
   }
 }
-

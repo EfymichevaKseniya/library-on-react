@@ -1,22 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 const BooksContext = React.createContext();
 
 class BooksContextProvider extends Component {
-  // Context state
-  state = {
-    books: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    };
   }
+  // Context state
 
   // Method to update state
   setBooks = (books) => {
-    this.setState((prevState) => ({ books }))
-  }
+    this.setState({ books });
+  };
 
   render() {
-    const { children } = this.props
-    const { books } = this.state
-    const { setBooks } = this
+    const { children } = this.props;
+    const { books } = this.state;
+    const { setBooks } = this;
 
     return (
       <BooksContext.Provider
@@ -27,7 +30,7 @@ class BooksContextProvider extends Component {
       >
         {children}
       </BooksContext.Provider>
-    )
+    );
   }
 }
 

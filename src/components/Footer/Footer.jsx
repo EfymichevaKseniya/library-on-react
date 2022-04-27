@@ -16,24 +16,24 @@ class Footer extends React.Component {
         <nav className={styles.nav}>
           <ol className={styles.nav__list}>
             <li>
-              <Link to="/">
+              <Link to='/'>
                 <img src={AllBook} alt='all book sign' />
               </Link>
             </li>
             <li>
-              <Link to="/add">
+              <Link to='/add'>
                 <img src={AddBook} alt='add book sign' />
               </Link>
             </li>
             <li>
-              <Link to="/favorite">
+              <Link to='/favorite'>
                 <img src={Favorite} alt='favorite sign' />
               </Link>
             </li>
           </ol>
         </nav>
       </footer>
-    )
+    );
   }
 }
 

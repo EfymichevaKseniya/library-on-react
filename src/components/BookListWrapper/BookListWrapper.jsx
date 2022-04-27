@@ -1,55 +1,49 @@
 import React from 'react';
 import BooksContext from '../../utils/BooksContext';
 import BookCard from '../BookCard/AddBookCard';
-import Modal from '../Modal/Modal';
+import { Modal } from '../Modal/Modal';
 import styles from './bookList.module.scss';
 
-
 class BookListWrapper extends React.Component {
+  static contextType = BooksContext;
+
   constructor(props) {
     super(props);
     this.showModal = this.showModal.bind(this);
     this.addBook = this.addBook.bind(this);
-    this.state = {idForShelf: ''};
-  }
-
-  state = {
-    modalOpen: false,
+    this.state = { idForShelf: '', modalOpen: false };
   }
 
   showModal() {
-    this.setState(prevState => ({
-      modalOpen: !prevState.modalOpen
+    this.setState((prevState) => ({
+      modalOpen: !prevState.modalOpen,
     }));
   }
 
   addBook(e) {
-    this.setState({idForShelf: e});
+    this.setState({ idForShelf: e });
   }
 
-  static contextType = BooksContext;
-
-    render() {
+  render() {
     const { books } = this.context;
-    const modalOpen = this.state.modalOpen;
-    const idForShelf = this.state.idForShelf;
-    // console.log(idForShelf);
+    const { modalOpen, idForShelf } = this.state;
 
     return (
       <>
         <ul className={styles.book__list}>
-          {books.length !== 0 && books.map((book, index) => {
+          {books.length !== 0 &&
+            books.map((book, index) => {
               return (
                 <BookCard
                   id={book.id}
                   title={book.volumeInfo.title}
                   key={book.id}
-                  index={index+1}
+                  index={index + 1}
                   modalOpen={modalOpen}
                   showModal={this.showModal}
                   addBook={this.addBook}
                 />
-              )
+              );
             })}
         </ul>
         <Modal
@@ -60,7 +54,7 @@ class BookListWrapper extends React.Component {
           showModal={this.showModal}
         />
       </>
-    )
+    );
   }
 }
 
