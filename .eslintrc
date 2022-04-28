@@ -31,10 +31,9 @@
     "no-use-before-define": "off",
     "jsx-quotes": ["error", "prefer-single"],
     "react/button-has-type": "warn",
-    "react-hooks/exhaustive-deps":  "off",
     "object-curly-newline": "off",
     "react/prefer-stateless-function": ["off", { "ignorePureComponents": "on" }],
-    "class-methods-use-this": ["error", { "enforceForClassFields": "off" }],
+    "class-methods-use-this": ["error", { "enforceForClassFields": false}],
     "react/destructuring-assignment": [
       "error",
       "always",

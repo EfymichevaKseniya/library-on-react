@@ -1,26 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from '../Buttons/Button';
 import CloseBtn from '../../img/close.svg';
 import styles from './modal.module.scss';
-import { connect } from 'react-redux';
 import BooksContext from '../../utils/BooksContext';
 import { removeBook } from '../../store/booksActions';
 
 export class ModalDeleteBook extends React.Component {
+  // eslint-disable-next-line react/static-property-placement
+  static contextType = BooksContext;
+
   constructor(props) {
     super(props);
-    this.id = this.props.id;
-    this.title = props.title;
-    this.content = props.content;
     this.onClickButton = this.onClickButton.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
   }
-
-  static contextType = BooksContext;
-
-  state = {
-    modalOpen: this.props.modalOpen,
-  };
 
   onClickButton = (e) => {
     e.preventDefault();
@@ -33,7 +27,9 @@ export class ModalDeleteBook extends React.Component {
   };
 
   render() {
-    if (!this.props.modalOpen) {
+    const { modalOpen, title, content } = this.props;
+
+    if (!modalOpen) {
       return null;
     }
     return (
@@ -43,7 +39,7 @@ export class ModalDeleteBook extends React.Component {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.modal__header}>
-            <h3 className={styles.modal__title}>{this.title} book</h3>
+            <h3 className={styles.modal__title}>{title} book</h3>
             <img
               className={styles.modal__close}
               src={CloseBtn}
@@ -53,7 +49,7 @@ export class ModalDeleteBook extends React.Component {
           </div>
           <div className={styles.modal__body}>
             <div className={styles.modal__content}>
-              Are you sure you want to {this.content} this book?
+              Are you sure you want to {content} this book?
             </div>
           </div>
           <div className={styles.modal__footer}>

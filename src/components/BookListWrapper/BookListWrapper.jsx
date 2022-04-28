@@ -1,11 +1,13 @@
+/* eslint-disable react/static-property-placement */
 import React from 'react';
 import BooksContext from '../../utils/BooksContext';
 import BookCard from '../BookCard/AddBookCard';
 import { Modal } from '../Modal/Modal';
 import styles from './bookList.module.scss';
 
-const contextType = BooksContext;
 class BookListWrapper extends React.Component {
+  static contextType = BooksContext;
+
   constructor(props) {
     super(props);
     this.showModal = this.showModal.bind(this);
@@ -24,7 +26,7 @@ class BookListWrapper extends React.Component {
   }
 
   render() {
-    const { books } = contextType;
+    const { books } = this.context;
     const { modalOpen, idForShelf } = this.state;
 
     return (

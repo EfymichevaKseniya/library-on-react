@@ -1,14 +1,13 @@
+/* eslint-disable class-methods-use-this */
 import React from 'react';
-import BooksContext, {
-  BooksContextProvider,
-} from '../../../utils/BooksContext';
+import { BooksContextProvider } from '../../../utils/BooksContext';
 import BookListWrapper from '../../BookListWrapper/BookListWrapper';
 import Page from '../../Page/Page';
 
 export const BookListContext = React.createContext();
 
 class AddBook extends React.Component {
-  static contextType = BooksContext;
+  // static contextType = BooksContext;
 
   render() {
     return (

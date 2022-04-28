@@ -1,34 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from '../Buttons/Button';
 import CloseBtn from '../../img/close.svg';
 import styles from './modal.module.scss';
-import { connect } from 'react-redux';
 import BooksContext from '../../utils/BooksContext';
 import { addBook } from '../../store/booksActions';
 
-const url = 'https://internsapi.public.osora.ru/api/book/add';
+// const url = 'https://internsapi.public.osora.ru/api/book/add';
 
 export class Modal extends React.Component {
+  // eslint-disable-next-line react/static-property-placement
+  static contextType = BooksContext;
+
   constructor(props) {
     super(props);
-    this.id = this.props.id;
-    this.title = props.title;
-    this.content = props.content;
     this.onClickButton = this.onClickButton.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
   }
 
-  static contextType = BooksContext;
-
-  state = {
-    modalOpen: this.props.modalOpen,
-  };
-
   onClickButton = (e) => {
     e.preventDefault();
     const { books } = this.context;
-    let book = books.find((item) => item.id === this.props.id);
-    let objBookOnServer = {
+    const book = books.find((item) => item.id === this.props.id);
+    const objBookOnServer = {
       id: book.id,
       title: book.volumeInfo.title,
       description: book.volumeInfo.description,
@@ -36,16 +30,6 @@ export class Modal extends React.Component {
       favorite: 0,
     };
     this.props.addBook(objBookOnServer);
-    // let response = await fetch(url, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${accessToken}`,
-    //   },
-    //   body: JSON.stringify(objBookOnServer)
-    // });
-    // console.log(JSON.stringify(objBookOnServer));
-    // console.log(await response.json());
     this.props.showModal(false);
   };
 
@@ -54,7 +38,8 @@ export class Modal extends React.Component {
   };
 
   render() {
-    if (!this.props.modalOpen) {
+    const { modalOpen, title, content } = this.props;
+    if (!modalOpen) {
       return null;
     }
     return (
@@ -64,7 +49,7 @@ export class Modal extends React.Component {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.modal__header}>
-            <h3 className={styles.modal__title}>{this.title} book</h3>
+            <h3 className={styles.modal__title}>{title} book</h3>
             <img
               className={styles.modal__close}
               src={CloseBtn}
@@ -74,7 +59,7 @@ export class Modal extends React.Component {
           </div>
           <div className={styles.modal__body}>
             <div className={styles.modal__content}>
-              Are you sure you want to {this.content} this book?
+              Are you sure you want to {content} this book?
             </div>
           </div>
           <div className={styles.modal__footer}>

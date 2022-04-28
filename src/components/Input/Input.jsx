@@ -1,16 +1,17 @@
 import React from 'react';
-import styles from './input.module.scss';
 import { Formik, Form, Field } from 'formik';
+import styles from './input.module.scss';
 import BooksContext from '../../utils/BooksContext';
 
 const url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
 class InputSearch extends React.Component {
+  // eslint-disable-next-line react/static-property-placement
   static contextType = BooksContext;
 
   handleSubmit = async (values) => {
-    let response = await fetch(`${url}${values.search}`);
-    let result = await response.json();
+    const response = await fetch(`${url}${values.search}`);
+    const result = await response.json();
     values.setBooks(result.items);
   };
 

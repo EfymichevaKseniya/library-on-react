@@ -1,22 +1,19 @@
+/* eslint-disable class-methods-use-this */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { BookListWrapperForMyBooks } from '../../BookListWrapper/BookListWrapperForMyBooks';
 import Page from '../../Page/Page';
-import { store } from '../../../App';
+import store from '../../../store';
 
 const auth = localStorage.getItem('token');
 
 export class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (auth === '' || auth === undefined) {
-      return <Navigate to='/login' replace={true} />;
+      return <Navigate to='/login' replace />;
     }
-    console.log(this.props);
+    // console.log(this.props);
     const books = store.getState().booksShelf;
     return (
       <Page>

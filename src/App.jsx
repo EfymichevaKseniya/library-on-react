@@ -1,18 +1,15 @@
+/* eslint-disable class-methods-use-this */
 import './App.scss';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { createStore } from 'redux';
-import { Home } from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import SignUp from './components/pages/SignUp/SignUp';
 import AddBook from './components/pages/AddBook/AddBook';
 import { InfoBook } from './components/pages/InfoBook/InfoBook';
 import { FavoriteBooks } from './components/pages/FavoriteBooks/FavoriteBooks';
-import allReducers from './store/booksReducer';
-
-export const store = createStore(allReducers, composeWithDevTools());
+import { Home } from './components/pages/Home/Home';
+import store from './store';
 
 class App extends React.Component {
   render() {

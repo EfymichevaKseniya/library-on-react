@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import * as actions from './actionTypes';
 
 // export default (state = [], action) => {
@@ -9,7 +10,11 @@ import * as actions from './actionTypes';
 //   }
 // };
 
-export default function booksReducer(action, state = { booksShelf: [] }) {
+const initialState = {
+  booksShelf: [],
+};
+
+export default function booksReducer(state = initialState, action) {
   switch (action.type) {
     case actions.ADD_BOOK:
       return {
