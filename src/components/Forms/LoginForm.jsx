@@ -1,8 +1,7 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
-import Alert from '../Alert/Alert';
 import * as Yup from 'yup';
+import Alert from '../Alert/Alert';
 import styles from './form.module.scss';
 import Button from '../Buttons/Button';
 
@@ -17,10 +16,13 @@ const SignUpSchema = Yup.object().shape({
 const url = 'https://internsapi.public.osora.ru/api/auth/login';
 
 class LoginForm extends React.Component {
-  state = { token: null, error: null };
+  constructor(props) {
+    super(props);
+    this.state = { error: null };
+  }
 
   handleSubmit = async (values) => {
-    let response = await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,10 +31,10 @@ class LoginForm extends React.Component {
     });
 
     try {
-      let token = await response.json();
-      console.log(token);
-      let data = await token.data;
-      this.setState({ token });
+      const token = await response.json();
+      // console.log(token);
+      const data = await token.data;
+      // this.setState({ token });
       localStorage.setItem('token', data.access_token);
     } catch (error) {
       this.setState({ error });
@@ -40,38 +42,33 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    let { token, error } = this.state;
+    const { error } = this.state;
     return (
-      <>
-        <Formik
-          initialValues={{ email: 'test@mail.ru', password: '123456' }}
-          validationSchema={SignUpSchema}
-          onSubmit={this.handleSubmit}
-        >
-          {({ isValid }) => {
-            return (
-              <Form className={styles.form}>
-                {/* {token && (
-                  <Navigate to='/' replace={true} />
-                )} */}
-                {!isValid || error ? (
-                  <Alert className='error' text={error.message} />
-                ) : null}
-                <h1 className={styles.title}>Login</h1>
-                <div className={styles.input__fields}>
-                  <Field className={styles.input} type='email' name='email' />
-                  <Field
-                    className={styles.input}
-                    type='password'
-                    name='password'
-                  />
-                </div>
-                <Button text='Log in' size='big' color='blue' type='submit' />
-              </Form>
-            );
-          }}
-        </Formik>
-      </>
+      <Formik
+        initialValues={{ email: 'test@mail.ru', password: '123456' }}
+        validationSchema={SignUpSchema}
+        onSubmit={this.handleSubmit}
+      >
+        {({ isValid }) => {
+          return (
+            <Form className={styles.form}>
+              {!isValid || error ? (
+                <Alert className='error' text={error.message} />
+              ) : null}
+              <h1 className={styles.title}>Login</h1>
+              <div className={styles.input__fields}>
+                <Field className={styles.input} type='email' name='email' />
+                <Field
+                  className={styles.input}
+                  type='password'
+                  name='password'
+                />
+              </div>
+              <Button text='Log in' size='big' color='blue' type='submit' />
+            </Form>
+          );
+        }}
+      </Formik>
     );
   }
 }

@@ -3,14 +3,8 @@ import AlertIcon from '../../img/alert.svg';
 import './alert.scss';
 
 export default class Alert extends React.Component {
-  constructor(props) {
-    super(props);
-    this.text = this.props.text;
-    this.className = this.props.className;
-  }
-
   render() {
-    const { text, className } = this.state;
+    const { text, className } = this.props;
     return (
       <div className={className}>
         <img src={AlertIcon} alt='alert sign' />

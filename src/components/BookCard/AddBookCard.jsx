@@ -5,9 +5,6 @@ import styles from './card.module.scss';
 class BookCard extends React.Component {
   constructor(props) {
     super(props);
-    this.id = props.id;
-    this.index = props.index;
-    this.title = props.title;
     this.favorite = 0;
     this.onClick = this.onClick.bind(this);
     // this.state = {
@@ -16,28 +13,26 @@ class BookCard extends React.Component {
   }
 
   onClick(e) {
-    this.props.addBook(e.target.closest('li').getAttribute('data-id'));
-    this.props.showModal();
+    const { addBook, showModal } = this.props;
+    addBook(e.target.closest('li').getAttribute('data-id'));
+    showModal();
   }
 
   render() {
+    const { id, title, index } = this.props;
     return (
-      <>
-        <li className={styles.card__item} key={this.id} data-id={this.id}>
-          <span
-            className={this.favorite ? styles.favorite : styles.unfavorite}
-          ></span>
-          <span className={styles.number}>{this.index}.</span>
-          <span className={styles.title}>{this.title}</span>
-          <Button
-            text='add'
-            color='green'
-            size='normal'
-            type='button'
-            onClick={this.onClick}
-          />
-        </li>
-      </>
+      <li className={styles.card__item} key={id} data-id={id}>
+        <span className={this.favorite ? styles.favorite : styles.unfavorite} />
+        <span className={styles.number}>{index}.</span>
+        <span className={styles.title}>{title}</span>
+        <Button
+          text='add'
+          color='green'
+          size='normal'
+          type='button'
+          onClick={this.onClick}
+        />
+      </li>
     );
   }
 }

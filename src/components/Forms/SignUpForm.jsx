@@ -21,10 +21,13 @@ const SignUpSchema = Yup.object().shape({
 const url = 'https://internsapi.public.osora.ru/api/auth/signup';
 
 class SignUpForm extends React.Component {
-  state = { user: null, error: null };
+  constructor(props) {
+    super(props);
+    this.state = { user: null, error: null };
+  }
 
   handleSubmit = async (values) => {
-    let response = await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +36,7 @@ class SignUpForm extends React.Component {
     });
 
     try {
-      let user = await response.json();
+      const user = await response.json();
       this.setState({ user });
     } catch (error) {
       this.setState({ error });
@@ -41,49 +44,47 @@ class SignUpForm extends React.Component {
   };
 
   render() {
-    let { user, error } = this.state;
+    const { user, error } = this.state;
     return (
-      <>
-        <Formik
-          initialValues={{
-            email: 'test@mail.ru',
-            password: '123456',
-            password_confirmation: '123456',
-            name: 'Igor',
-          }}
-          validationSchema={SignUpSchema}
-          validateOnBlur={true}
-          onSubmit={this.handleSubmit}
-        >
-          {({ isValid }) => {
-            return (
-              <Form className={styles.form}>
-                {error && <Alert className='error' text={error.message} />}
-                {user && <Navigate to='/login' replace={true} />}
-                {!isValid ? (
-                  <Alert className='error' text='Alert message' />
-                ) : null}
-                <h1 className={styles.title}>Registration</h1>
-                <div className={styles.input__fields}>
-                  <Field className={styles.input} type='name' name='name' />
-                  <Field className={styles.input} type='email' name='email' />
-                  <Field
-                    className={styles.input}
-                    type='password'
-                    name='password'
-                  />
-                  <Field
-                    className={styles.input}
-                    type='password'
-                    name='password_confirmation'
-                  />
-                </div>
-                <Button text='Submit' size='big' color='blue' type='submit' />
-              </Form>
-            );
-          }}
-        </Formik>
-      </>
+      <Formik
+        initialValues={{
+          email: 'test@mail.ru',
+          password: '123456',
+          password_confirmation: '123456',
+          name: 'Igor',
+        }}
+        validationSchema={SignUpSchema}
+        validateOnBlur
+        onSubmit={this.handleSubmit}
+      >
+        {({ isValid }) => {
+          return (
+            <Form className={styles.form}>
+              {error && <Alert className='error' text={error.message} />}
+              {user && <Navigate to='/login' replace />}
+              {!isValid ? (
+                <Alert className='error' text='Alert message' />
+              ) : null}
+              <h1 className={styles.title}>Registration</h1>
+              <div className={styles.input__fields}>
+                <Field className={styles.input} type='name' name='name' />
+                <Field className={styles.input} type='email' name='email' />
+                <Field
+                  className={styles.input}
+                  type='password'
+                  name='password'
+                />
+                <Field
+                  className={styles.input}
+                  type='password'
+                  name='password_confirmation'
+                />
+              </div>
+              <Button text='Submit' size='big' color='blue' type='submit' />
+            </Form>
+          );
+        }}
+      </Formik>
     );
   }
 }

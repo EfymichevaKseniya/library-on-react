@@ -9,10 +9,10 @@ export default class Button extends React.Component {
     this.color = props.color;
     this.type = props.type;
     this.text = props.text;
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {}
+  // handleClick() {}
 
   render() {
     return (

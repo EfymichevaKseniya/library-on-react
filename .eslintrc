@@ -14,6 +14,9 @@
     "ecmaFeatures": {
       "jsx": true
     },
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
     "ecmaVersion": 12,
     "sourceType": "module"
   },
@@ -31,6 +34,7 @@
     "react-hooks/exhaustive-deps":  "off",
     "object-curly-newline": "off",
     "react/prefer-stateless-function": ["off", { "ignorePureComponents": "on" }],
+    "class-methods-use-this": ["error", { "enforceForClassFields": "off" }],
     "react/destructuring-assignment": [
       "error",
       "always",

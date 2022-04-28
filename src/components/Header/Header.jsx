@@ -12,6 +12,7 @@ class Header extends React.Component {
       </h1>
     );
   };
+
   render() {
     return <header className={styles.header}>{this.headerContent()}</header>;
   }

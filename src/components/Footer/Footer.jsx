@@ -6,10 +6,6 @@ import Favorite from '../../img/favorite-book.svg';
 import styles from './footer.module.scss';
 
 class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <footer className={styles.footer}>
