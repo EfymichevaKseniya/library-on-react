@@ -12,11 +12,12 @@ export const token = localStorage.getItem('token');
 //   });
 // }
 
-export function booksFetchData() {
+export function booksFetchData(url, method) {
   return async (dispatch) => {
     dispatch(booksIsLoading(true));
 
-    fetch(`${BASEURL}/list`, {
+    fetch(url, {
+      method: method || 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: `Bearer${token}`,

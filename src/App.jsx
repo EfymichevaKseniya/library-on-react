@@ -1,15 +1,15 @@
 /* eslint-disable class-methods-use-this */
-import './App.scss';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Login from './components/pages/Login/Login';
-import SignUp from './components/pages/SignUp/SignUp';
-import AddBook from './components/pages/AddBook/AddBook';
-import { InfoBook } from './components/pages/InfoBook/InfoBook';
-import { FavoriteBooks } from './components/pages/FavoriteBooks/FavoriteBooks';
-import { Home } from './components/pages/Home/Home';
-import store from './store';
+import Login from './js/pages/Login/Login';
+import SignUp from './js/pages/SignUp/SignUp';
+import AddBook from './js/pages/AddBook/AddBook';
+import { InfoBook } from './js/pages/InfoBook/InfoBook';
+import { FavoriteBooks } from './js/pages/FavoriteBooks/FavoriteBooks';
+import { Home } from './js/pages/Home/Home';
+import './styles/App.scss';
+import store from './js/redux/store';
 
 class App extends React.Component {
   render() {

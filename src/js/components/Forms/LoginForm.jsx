@@ -32,9 +32,7 @@ class LoginForm extends React.Component {
 
     try {
       const token = await response.json();
-      // console.log(token);
       const data = await token.data;
-      // this.setState({ token });
       localStorage.setItem('token', data.access_token);
     } catch (error) {
       this.setState({ error });
