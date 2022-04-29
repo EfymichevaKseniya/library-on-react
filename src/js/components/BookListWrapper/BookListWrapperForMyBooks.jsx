@@ -12,21 +12,19 @@ export class BookListWrapperForMyBooks extends React.Component {
     this.state = { idForShelf: '', modalOpen: false };
   }
 
+  deleteBook = (e) => {
+    this.setState({ idForShelf: e });
+  };
+
   showModal() {
     this.setState((prevState) => ({
       modalOpen: !prevState.modalOpen,
     }));
   }
 
-  deleteBook(e) {
-    this.setState({ idForShelf: e });
-  }
-
   render() {
-    // const books  = this.props.booksShelf;
     const { modalOpen, idForShelf } = this.state;
     const { books } = this.props;
-    // console.log(this.books);
 
     return (
       <>
@@ -53,6 +51,7 @@ export class BookListWrapperForMyBooks extends React.Component {
           title='Delete'
           content='delete'
           showModal={this.showModal}
+          deleteBook={this.deleteBook}
         />
       </>
     );
