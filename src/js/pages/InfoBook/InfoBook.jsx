@@ -2,15 +2,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Page from '../../components/Page/Page';
-import store from '../../redux';
 import styles from './info.module.scss';
+import request from '../../../utils/request';
+import { BASEURL } from '../../redux/actions';
 
 export class InfoBook extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = { book: {} };
+  }
+
+  componentDidMount() {
+    this.setData();
+  }
+
+  setData = async () => {
+    const result = await request(`${BASEURL}/list`);
     const id = window.location.pathname.split('/')[2];
-    const book = store.getState().booksShelf.find((item) => item.id === id);
-    // console.log(id);
-    // console.log(book);
+    const findBook = result.find((item) => item.id === +id);
+    this.setState({ book: findBook });
+  };
+
+  render() {
+    const { book } = this.state;
     return (
       <Page>
         <div className={styles.book}>
