@@ -1,0 +1,12 @@
+@import '../../../styles/fonts.scss';
+@import '../../../styles/colors.scss';
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  background: $alert;
+  color: $white;
+  @include alert;
+}
