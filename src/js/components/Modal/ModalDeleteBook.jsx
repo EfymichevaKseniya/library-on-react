@@ -3,21 +3,19 @@ import { connect } from 'react-redux';
 import Button from '../Buttons/Button';
 import CloseBtn from '../../../img/close.svg';
 import styles from './modal.module.scss';
-import BooksContext from '../../../utils/BooksContext';
+import request from '../../../utils/request';
+import { BASEURL } from '../../redux/actions';
 
 export class ModalDeleteBook extends React.Component {
-  // eslint-disable-next-line react/static-property-placement
-  static contextType = BooksContext;
-
   constructor(props) {
     super(props);
     this.onClickButton = this.onClickButton.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
   }
 
-  onClickButton = (e) => {
-    e.preventDefault();
-    this.props.removeBook(this.id);
+  onClickButton = () => {
+    request(`${BASEURL}/destroy/${this.props.id}`);
+
     this.props.showModal(false);
   };
 

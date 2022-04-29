@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../Buttons/Button';
 import styles from './card.module.scss';
+import request from '../../../utils/request';
+import { BASEURL } from '../../redux/actions';
 
 export class BookCardInList extends React.Component {
   constructor(props) {
@@ -11,14 +13,19 @@ export class BookCardInList extends React.Component {
     this.openModal = this.openModal.bind(this);
   }
 
-  onClick = () => {
-    this.props.toggleFavorite(this.id);
-    // console.log(this.id);
-    // console.log(this.props.booksShelf.find((item) => item.id === this.id));
+  onClick = (e) => {
+    e.preventDefault();
+    const id = e.target.closest('li').getAttribute('data-id');
+    request(
+      `${BASEURL}/update/${id}?favorite=${this.props.favorite ? 0 : 1}`,
+      'POST'
+    );
   };
 
-  openModal = () => {
-    const { showModal } = this.props;
+  openModal = (e) => {
+    const { showModal, deleteBook } = this.props;
+    const id = e.target.closest('li').getAttribute('data-id');
+    deleteBook(id);
     showModal();
   };
 
@@ -45,13 +52,7 @@ export class BookCardInList extends React.Component {
             onClick={this.openModal}
           />
           <Link to={`info/${id}`}>
-            <Button
-              text='I'
-              color='blue'
-              size='small'
-              type='button'
-              onClick={this.onClick}
-            />
+            <Button text='I' color='blue' size='small' type='button' />
           </Link>
         </div>
       </li>
