@@ -24,8 +24,7 @@ export class BookListWrapperForMyBooks extends React.Component {
 
   render() {
     const { modalOpen, idForShelf } = this.state;
-    const { books } = this.props;
-
+    const { books, reRenderParent } = this.props;
     return (
       <>
         <ul className={styles.book__list}>
@@ -41,6 +40,7 @@ export class BookListWrapperForMyBooks extends React.Component {
                   favorite={book.favorite}
                   showModal={this.showModal}
                   deleteBook={this.deleteBook}
+                  reRender={reRenderParent}
                 />
               );
             })}
@@ -52,6 +52,7 @@ export class BookListWrapperForMyBooks extends React.Component {
           content='delete'
           showModal={this.showModal}
           deleteBook={this.deleteBook}
+          reRender={reRenderParent}
         />
       </>
     );

@@ -1,22 +1,30 @@
 import { token } from '../js/redux/actions';
 
-const request = async (url, method) => {
-  const response = await fetch(url, {
-    method: method || 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
+const request = async (url, method, loadData) => {
+  loadData({ loading: true });
   try {
-    const result = await response.json();
-    return result.data;
+    const response = await fetch(url, {
+      method: method || 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      loadData({ loading: false });
+      throw Error(response.statusText);
+    }
+    try {
+      const result = await response.json();
+      loadData({ loading: false });
+      return result.data;
+    } catch (e) {
+      loadData({ data: e, loading: false });
+      return e;
+    }
   } catch (e) {
-    return e;
+    loadData({ loading: false });
+    throw Error(e.Error);
   }
 };
 

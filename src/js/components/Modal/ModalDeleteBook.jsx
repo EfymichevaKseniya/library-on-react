@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../Buttons/Button';
@@ -11,12 +14,14 @@ export class ModalDeleteBook extends React.Component {
     super(props);
     this.onClickButton = this.onClickButton.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
+    this.setState = this.setState.bind(this);
+    this.state = { isComponentUpdate: this.props.isComponentUpdate, loading: false };
   }
 
   onClickButton = () => {
-    request(`${BASEURL}/destroy/${this.props.id}`);
-
+    request(`${BASEURL}/book/destroy/${this.props.id}`, 'GET', this.setState);
     this.props.showModal(false);
+    this.props.reRender(true);
   };
 
   onCloseModal = () => {

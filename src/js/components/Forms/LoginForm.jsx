@@ -1,9 +1,12 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+// eslint-disable-next-line import/no-cycle
+import { history } from '../../../App';
 import Alert from '../Alert/Alert';
 import styles from './form.module.scss';
 import Button from '../Buttons/Button';
+import { BASEURL } from '../../redux/actions';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Введите email'),
@@ -13,16 +16,20 @@ const SignUpSchema = Yup.object().shape({
     .required('Поле не может быть пустым'),
 });
 
-const url = 'https://internsapi.public.osora.ru/api/auth/login';
-
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { error: null };
+    this.state = { error: '' };
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.location.pathname !== window.location.pathname) {
+      this.setState({ error: null });
+    }
   }
 
   handleSubmit = async (values) => {
-    const response = await fetch(url, {
+    const response = await fetch(`${BASEURL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,6 +41,8 @@ class LoginForm extends React.Component {
       const token = await response.json();
       const data = await token.data;
       localStorage.setItem('token', data.access_token);
+      history.push('/');
+      window.location.reload();
     } catch (error) {
       this.setState({ error });
     }

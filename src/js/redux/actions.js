@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 
-export const BASEURL = 'https://internsapi.public.osora.ru/api/book';
+export const BASEURL = 'https://internsapi.public.osora.ru/api';
 export const token = localStorage.getItem('token');
 
 // export const fetchBooks = () => async (dispatch) => {

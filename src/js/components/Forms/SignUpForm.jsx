@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import styles from './form.module.scss';
 import Button from '../Buttons/Button';
 import Alert from '../Alert/Alert';
+import { BASEURL } from '../../redux/actions';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Введите email'),
@@ -18,8 +19,6 @@ const SignUpSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
 });
 
-const url = 'https://internsapi.public.osora.ru/api/auth/signup';
-
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +26,7 @@ class SignUpForm extends React.Component {
   }
 
   handleSubmit = async (values) => {
-    const response = await fetch(url, {
+    const response = await fetch(`${BASEURL}/auth/signup'`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

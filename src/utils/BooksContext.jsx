@@ -23,6 +23,7 @@ class BooksContextProvider extends Component {
 
     return (
       <BooksContext.Provider
+        // eslint-disable-next-line react/jsx-no-constructed-context-values
         value={{
           books,
           setBooks,

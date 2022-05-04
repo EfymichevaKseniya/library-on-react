@@ -33,7 +33,7 @@ export class Modal extends React.Component {
       .map((item) => item.join('='))
       .join('&');
 
-    await fetch(`${BASEURL}/add`, {
+    await fetch(`${BASEURL}/book/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
